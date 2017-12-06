@@ -3,6 +3,30 @@ body {
 
 }
 
+
+/*
+
+	Quitando elementos del Boton tipo "file"
+	- Se quita botones de la intefaz, el botón para subir archivos y visualizar la imágen
+	  solo se deja el botón de eliminar la imagen a subir
+
+*/
+.kv-file-upload, .kv-file-zoom, .fileinput-upload-button {
+	display: none;
+}
+
+/*
+	Ocultamos por ahora la barra de progreso de carga de la imagen
+*/
+#uploader {
+	display: none;
+	-webkit-appearance: none;
+	appearance: none;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+
 /* Se cambia el color de la fila cuando el apuntador pasa sobre ella, color verde claro */
 .table-hover tbody tr:hover {
 	background: #CEEFD5;

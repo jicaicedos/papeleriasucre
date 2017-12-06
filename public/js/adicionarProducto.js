@@ -15,6 +15,8 @@ function adicionarProducto() {
 	formAdicionarProducto.addEventListener("submit", enviarDatosProductoAFirebase, false)
 
 	refPapeleriaSucreBD = firebase.database().ref().child("papeleriabd")
+
+	cargarImagen()
 }
 
 /* 
@@ -34,9 +36,22 @@ function enviarDatosProductoAFirebase(event) {
 
 	refPapeleriaSucreBD.push({
 		nombre: event.target.nombreProducto.value,
-		precio: event.target.precioProducto.value
+		marca: event.target.marcaProducto.value,
+		tipo: event.target.tipoProducto.value,
+		descripcion: event.target.descripcionProducto.value,
+		medidas: event.target.medidasProducto.value,
+		cantidad: event.target.cantidadProducto.value,
+		precio: event.target.precioProducto.value,
+		imagen: $("#file-es")[0].files[0].name
+
 	});
 
 	formAdicionarProducto.reset()
 
 }
+
+// Obtener elemento boton cargar imagenes: $("#file-es")[0].files[0].name
+// Obtener contenido de elemento: $("#file-es")[0]
+// Obtener primer imagen $("#file-es")[0].files[0]  
+// Obtener nombre de primer imagen:    $("#file-es")[0].files[0].name
+
