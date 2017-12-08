@@ -14,6 +14,10 @@
 	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
 
+	<!-- Firebase storage (para guardar imágenes, videos, audios en la base de datos o espacio de almacenamiento) -->
+	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-storage.js"></script>
+
+
 	<!-- Responsive design -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -28,20 +32,6 @@
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
-
-	<!-- Firebase -->
-	<script>
-	  // Initialize Firebase
-	  var config = {
-	    apiKey: "AIzaSyAIfB5JDqbr5_14oJAJh5IOap6PBemiu0A",
-	    authDomain: "papeleria-sucre.firebaseapp.com",
-	    databaseURL: "https://papeleria-sucre.firebaseio.com",
-	    projectId: "papeleria-sucre",
-	    storageBucket: "papeleria-sucre.appspot.com",
-	    messagingSenderId: "1075654820216"
-	  };
-	  firebase.initializeApp(config);
-	</script>
 
 	<link rel="stylesheet" href="css/estilos.css">
 	<script src="js/cargarHtml.js"></script>
@@ -60,6 +50,12 @@
 			<div class="col-sm-6">
 
 				<div class="row">
+
+					<div id="mostrarImg">
+						<img id="imagenfirebase" src="" alt="">
+					</div>
+
+					<!-- <img src="gs://papeleria-sucre.appspot.com/imagenes/cuaderno_scribe.gif" alt="" /> -->
 					<div class="row">
 						Somos una Empresa Colombiana, distribuidora de productos de Papelería, que satisface necesidades de hogares en artículos para oficina y útiles escolares con calidad, buen servicio y precios competitivos.
 						<hr>
@@ -94,6 +90,36 @@
 
  	<script>cargarFooter()</script>
  	<script>cargarNav()</script>
+
+	<!-- Firebase -->
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyAIfB5JDqbr5_14oJAJh5IOap6PBemiu0A",
+	    authDomain: "papeleria-sucre.firebaseapp.com",
+	    databaseURL: "https://papeleria-sucre.firebaseio.com",
+	    projectId: "papeleria-sucre",
+	    storageBucket: "papeleria-sucre.appspot.com",
+	    messagingSenderId: "1075654820216"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+
+
+	<script>
+
+		var storageRef = firebase.storage().ref()
+
+		storageRef.child('imagenes/cuaderno_scribe.gif').getDownloadURL().then(function(url) {
+			var imagen = document.getElementById("imagenfirebase");
+			imagen.src = url
+
+		}).catch(function(error){
+
+		});
+
+
+	</script>
 
 </body>
 </html>

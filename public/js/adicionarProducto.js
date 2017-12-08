@@ -34,19 +34,69 @@ function enviarDatosProductoAFirebase(event) {
 
 	event.preventDefault()
 
-	refPapeleriaSucreBD.push({
-		nombre: event.target.nombreProducto.value,
-		marca: event.target.marcaProducto.value,
-		tipo: event.target.tipoProducto.value,
-		descripcion: event.target.descripcionProducto.value,
-		medidas: event.target.medidasProducto.value,
-		cantidad: event.target.cantidadProducto.value,
-		precio: event.target.precioProducto.value,
-		imagen: $("#file-es")[0].files[0].name
+	// Obtenemos el nombre de la imagen
+	var nombreImagen = $("#file-es")[0].files[0].name
 
+	// Creamos referencia raiz
+	var storageRef = firebase.storage().ref()
+
+	// Creamos referencia a la imagen
+	// Queda con dirección "gs://......"
+	// Ejemplo:  gs://papeleria-sucre.appspot.com/imagenes/cuaderno_scribe.gif
+	// var imagenRuta = storageRef.child('imagenes/' + nombreImagen)
+	
+	// refPapeleriaSucreBD.push({
+	// 	nombre: $("#nombre-del-producto").val(),
+	// 	marca: $("#marca-del-producto").val(),
+	// 	tipo: $("#tipo-del-producto").val(),
+	// 	descripcion: $("#descripcion-del-producto").val(),
+	// 	medidas: $("#medidas-del-producto").val(),
+	// 	cantidad: $("#cantidad-del-producto").val(),
+	// 	precio: $("#precio-del-producto").val(),
+	// 	imagen: imagenRuta
+	// }).catch(function(error){
+	// 	alert('Error: No se logró obtener la ubicación de la imagen del producto')
+	// });
+
+
+	const nombreP = $("#nombre-del-producto").val()
+	const marcaP = $("#marca-del-producto").val()
+	const tipoP = $("#tipo-del-producto").val()
+	const descripcionP = $("#descripcion-del-producto").val()
+	const medidasP = $("#medidas-del-producto").val()
+	const cantidadP = $("#cantidad-del-producto").val()
+	const precioP = $("#precio-del-producto").val()
+
+
+	// Obtenemos la dirección o URL de la ubicación de la imagen subida en Firebase (storage)
+	storageRef.child('imagenes/' + nombreImagen).getDownloadURL().then(function(url) {
+
+		refPapeleriaSucreBD.push({
+			// nombre: event.target.nombreProducto.value,
+			// marca: event.target.marcaProducto.value,
+			// tipo: event.target.tipoProducto.value,
+			// descripcion: event.target.descripcionProducto.value,
+			// medidas: event.target.medidasProducto.value,
+			// cantidad: event.target.cantidadProducto.value,
+			// precio: event.target.precioProducto.value,
+
+			nombre: nombreP,
+			marca: marcaP,
+			tipo: tipoP,
+			descripcion: descripcionP,
+			medidas: medidasP,
+			cantidad: cantidadP,
+			precio: precioP,
+			imagen: url
+		});
+
+	}).catch(function(error){
+		alert('Error: No se logró obtener la ubicación de la imagen del producto')
 	});
 
 	formAdicionarProducto.reset()
+
+	alert('Producto agregado exitosamente')
 
 }
 

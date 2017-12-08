@@ -5,7 +5,9 @@ var refPapeleriaSucreStorage
 refPapeleriaSucreBD = firebase.database().ref().child("papeleriabd")
 
 // Creamos referencia al Storage del Proyecto Papeleria Sucre
-refPapeleriaSucreStorage = firebase.storage().ref().child("papeleriasucre")
+// refPapeleriaSucreStorage = firebase.storage().ref().child("papeleriasucre")
+// storageRef = firebase.storage().ref()
+
 
 
 refPapeleriaSucreBD.on("value", function(snap) {
@@ -15,20 +17,18 @@ refPapeleriaSucreBD.on("value", function(snap) {
 
 	for(var key in datos) {
 
-		// obtenemos el nombre de la imagen del producto de la papleria
-		var imagen = refPapeleriaSucreStorage.child(datos[key].imagen)
-
 		registrosProductos += 	"<tr>" +
 									"<td>" + datos[key].nombre + "</td>" +
+									"<td>" + datos[key].marca + "</td>" +
 									"<td>" + datos[key].tipo + "</td>" +
 									"<td>" + datos[key].descripcion + "</td>" +
 									"<td>" + datos[key].medidas + "</td>" +
 									"<td>" + datos[key].cantidad + "</td>" +
 									"<td>" + datos[key].precio + "</td>" +
-									"<td>" + imagen + "</td>" +
-									"<td>" + datos[key].precio + "</td>" +
+									"<td><img src='" + datos[key].imagen + "' alt='' width='40' height='auto' /></td>" +
 								"</tr>"
 	}
+
 	$("#table-productos").html(registrosProductos)
 
 });	
