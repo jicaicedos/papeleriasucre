@@ -1,4 +1,4 @@
-function cargarImagen() {
+function cargarImagen(event) {
 	// Obtener elementos
 	var uploader = document.getElementById("uploader")
 	var fileButton = document.getElementById("file-es")
