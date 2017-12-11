@@ -51,10 +51,6 @@
 
 				<div class="row">
 
-					<div id="mostrarImg">
-						<img id="imagenfirebase" src="" alt="">
-					</div>
-
 					<!-- <img src="gs://papeleria-sucre.appspot.com/imagenes/cuaderno_scribe.gif" alt="" /> -->
 					<div class="row">
 						Somos una Empresa Colombiana, distribuidora de productos de Papelería, que satisface necesidades de hogares en artículos para oficina y útiles escolares con calidad, buen servicio y precios competitivos.
@@ -103,22 +99,6 @@
 	    messagingSenderId: "1075654820216"
 	  };
 	  firebase.initializeApp(config);
-	</script>
-
-
-	<script>
-
-		var storageRef = firebase.storage().ref()
-
-		storageRef.child('imagenes/cuaderno_scribe.gif').getDownloadURL().then(function(url) {
-			var imagen = document.getElementById("imagenfirebase");
-			imagen.src = url
-
-		}).catch(function(error){
-
-		});
-
-
 	</script>
 
 </body>
