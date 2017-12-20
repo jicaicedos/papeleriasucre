@@ -20,12 +20,12 @@ refPapeleriaSucreBD.on("value", function(snap) {
 		registrosProductos += 	"<tr>" +
 									"<td>" + datos[key].nombre + "</td>" +
 									"<td>" + datos[key].marca + "</td>" +
-									"<td>" + datos[key].tipo + "</td>" +
-									"<td>" + datos[key].descripcion + "</td>" +
-									"<td>" + datos[key].medidas + "</td>" +
+									"<td class='ocultarColumna'>" + datos[key].tipo + "</td>" +
+									"<td class='ocultarColumna'>" + datos[key].descripcion + "</td>" +
+									"<td class='ocultarColumna'>" + datos[key].medidas + "</td>" +
 									"<td>" + datos[key].cantidad + "</td>" +
 									"<td>" + datos[key].precio + "</td>" +
-									"<td><img src='" + datos[key].imagen + "' alt='' width='40' height='auto' /></td>" +
+									"<td class='ocultarColumna'><img src='" + datos[key].imagen + "' alt='' width='30' height='auto' /></td>" +
 								"</tr>"
 	}
 

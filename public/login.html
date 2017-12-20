@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Iniciar sesión</title>
+
+
+	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
+
+	<!-- firebase -->
+	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+
+	<!-- <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script> -->
+
+<!-- 	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>	
+ -->
+	<link rel="stylesheet" href="css/estilosLogin.css">
+
+</head>
+<body>
+	
+	<form action="">
+		
+		<label for="usuario"></label>
+		<input type="text" id="usuario" placeholder="Usuario" required />
+
+		<label for="clave"></label>
+		<input type="password" id="clave" placeholder="Contraseña" required />
+
+		<button id="btnIniciarSesion" class="btn btn-accion">
+			Iniciar sesión
+		</button>
+
+		<button id="btnRegistrarse" class="btn btn-secondary">
+			Registrarse
+		</button>
+
+		<button id="btnCerrarSesion" class="btn btn-accion hide">
+			Cerrar sesión
+		</button>
+
+	</form>
+
+	<script src="js/autenticacion.js"></script>
+
+</body>
+</html>

@@ -102,21 +102,30 @@
 						<label for="medidas-del-producto">Medidas del producto</label>
 						<input type="text" name="medidasProducto" class="form-control" value="" id="medidas-del-producto" placeholder="Ej. 15 cm X 25 cm">
 					</div>
-					<div class="form-group">
-						<label for="cantidad-del-producto">Cantidad del producto</label>
-						<input type="number" name="cantidadProducto" class="form-control" value="" id="cantidad-del-producto" placeholder="Ej. 10">
-					</div>					
-					<div class="form-group">
-						<label for="precio-del-producto">Precio del producto *</label>
-						<input type="number" name="precioProducto" class="form-control" value="" id="precio-del-producto">
+					<div class="row">
+						<div class="col-md-6">
+
+							<div class="form-group">
+								<label for="cantidad-del-producto">Cantidad del producto</label>
+								<input type="number" name="cantidadProducto" class="form-control" value="" id="cantidad-del-producto" placeholder="Ej. 10">
+							</div>
+						</div>
+						<div class="col-sm-6">
+
+							<div class="form-group">
+								<label for="precio-del-producto">Precio del producto *</label>
+								<input type="number" name="precioProducto" class="form-control" value="" id="precio-del-producto" placeholder="5000">
+							</div>
+						</div>		
 					</div>
+					
 
 					<!-- Boton para buscar y subir las imágenes -->
 					<div class="form-group">
 						<label for="file-es">Cargar imágen *</label>	
 						<!-- Barra de progreso de carga de la imágen -->
 						<progress value="0" max="100" id="uploader" ></progress>
-						<input id="file-es" name="imagenProducto" value="upload" class="file-4" type="file" data-upload-url="#" />
+						<input id="file-es" name="imagenProducto" value="upload" class="file-4" type="file" data-upload-url="#" required />
 					</div>
 
 					<br>
