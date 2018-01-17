@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 
 	<meta charset="UTF-8">
@@ -36,6 +36,15 @@
 	<!-- JQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+	<!-- Iconos -->
+	<!-- <link rel="stylesheet" href="css/style.css"> -->
+
+	<!-- ALERTS!!! mas agradables -->
+	<link rel="stylesheet" href="alertifyjs/build/css/alertify.min.css" /> 
+	<link rel="stylesheet" href="alertifyjs/build/css/themes/default.min.css" />
+	<script src="alertifyjs/build/alertify.min.js"></script>
+
+
 	<script src="js/cargarHtml.js"></script>
 	<link rel="stylesheet" href="css/estilos.css">
 
@@ -54,6 +63,7 @@
 	</script>
 
 	<script src="js/consultarProductos.js"></script>
+	<script src="js/modificarProducto.js"></script>
 
 
 </head>
@@ -64,10 +74,7 @@
 	<!-- Estructura de la página -->
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-1">
-				
-			</div>
-			<div class="col-sm-10">
+			<div class="col-sm-12">
 				<table class="table table-hover table-striped table-bordered table-condensed table-responsive" style='width: 100%'>
 					<thead>
 						<tr>
@@ -79,17 +86,15 @@
 							<th>Cantidad</th>
 							<th>Precio</th>
 							<th class="ocultarColumna">Imagen</th>
+							<th>Modificar</th>
+							<th>Eliminar</th>							
 						</tr>	
 					</thead>
 					<tbody id="table-productos" class="text-lowercase">
 					</tbody>
 				</table>
 			</div>
-			<div class="col-sm-1">
-				<img id="imgTemporal" src="" alt="" width="40" height="auto" />
-			</div>			
-		</div>	
-	
+		</div>		
 	</div>
 
 	<!-- Pie de página -->

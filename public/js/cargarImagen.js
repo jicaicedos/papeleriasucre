@@ -1,7 +1,9 @@
 function cargarImagen(event) {
+
+
 	// Obtener elementos
-	var uploader = document.getElementById("uploader")
-	var fileButton = document.getElementById("file-es")
+	var uploader = this.document.getElementById("uploader")
+	var fileButton = this.document.getElementById("file-es")
 
 	// Escuchador para boton seleccionar imagen
 	fileButton.addEventListener("change", function(event) {

@@ -1,0 +1,2 @@
+- Borrar imagen de firebase.storage, cuando se elimine un producto
+- Actualizar (borrar existente) imagen de firebase.storage, cuando se actualice

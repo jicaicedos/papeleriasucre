@@ -1,7 +1,10 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
-# documentos de la papelería
+# documentos de la papelería (archivo word y excel con el inventario)
 /documentacion
+
+# Imágenes
+/img
 
 # dependencies
 /node_modules

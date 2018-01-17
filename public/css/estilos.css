@@ -15,9 +15,18 @@ body {
 	display: none;
 }
 
+.btnModificar, .btnEliminar {
+	width: 80px;
+	height: 40px;
+	border-radius: 10px;
+}
 
 .ocultarColumna {
 	display: none;
+}
+
+#btnBuscarProductoModificar {
+	display: grid;
 }
 
 /*

@@ -24,7 +24,7 @@ function adicionarProducto() {
 
 /* 
 	Se encarga de enviar los datos o atributos del producto a la base de datos hospedada en Firebase
-	para lo cual usa e método push({objeto}), al cual se le envía el objeto con todos los valores 
+	para lo cual usa el método push({objeto}), al cual se le envía el objeto con todos los valores 
 	digitados por el usuario y posteriormente almacenados en la base de datos "papeleriabd"
 
 	@event  Se usa para evitar que se recargue los datos y se almacenen repetidamente con .preventDefault()
@@ -64,17 +64,18 @@ function enviarDatosProductoAFirebase(event) {
 			medidas: medidasP,
 			cantidad: cantidadP,
 			precio: precioP,
-			imagen: url
+			imagen: url,
 		});
 
 	}).catch(function(error){
-		alert('Error: No se logró obtener la ubicación de la imagen del producto')
+		alertify.error('Papelería Sucre','Error: No se logró obtener la ubicación de la imagen del producto')
 	});
 
 	// Limpiamos los datos ingresados por el usuario en el formulario de "Adicionar producto"
 	formAdicionarProducto.reset()
 
-	alert('Producto agregado exitosamente')
+	alertify.alert('Papelería Sucre','Producto agregado exitosamente',function(){})
+	// alertify.error('Papelería Sucre','Error: No se logró obtener la ubicación de la imagen del producto')
 
 }
 
