@@ -16,9 +16,18 @@ body {
 }
 
 .btnModificar, .btnEliminar {
-	width: 80px;
-	height: 40px;
-	border-radius: 10px;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+}
+
+.table td, .table th {
+	padding: 0.3rem;
+}
+
+.container {
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .ocultarColumna {
@@ -41,7 +50,7 @@ body {
 }
 
 .table {
-	font-size: 12px;
+	font-size: 14px;
 }
 
 /* Se cambia el color de la fila cuando el apuntador pasa sobre ella, color verde claro */
@@ -113,6 +122,21 @@ body {
 
 	.footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns { 
 		border-left:solid 2px rgba(255,255,255,0.10); 
+	}
+
+	.btnModificar, .btnEliminar {
+		width: 80px;
+		height: 40px;
+		border-radius: 10px;
+	}
+
+	.table td, .table th {
+		padding: 0.75rem;
+	}
+
+	.container {
+		padding-left: 15px;
+		padding-right: 15px;
 	}
 
 }

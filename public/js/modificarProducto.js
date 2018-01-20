@@ -1,7 +1,7 @@
 var refPapeleriaSucreBD
 var formAdicionarProducto
 var keyProductoModificar
-
+var refStorage
 
 // ===========================================================================
 function modificarProducto() {
@@ -34,30 +34,30 @@ function modificarProductoEnFirebase(event) {
 	const medidasP 		= $("#medidasProducto").val()
 	const cantidadP 	= $("#cantidadProducto").val()
 	const precioP 		= $("#precioProducto").val()
-	var imagenP = ''
-	// const imagenP       = $("#imagenProducto").attr("src")
 
 	// Si el usuario eligió una nueva imagen para el producto entonces se actualizará su URL
 	// de lo contrario se almacenará la misma ruta de la imagen ya cargada con anterioridad
-	var imagenObjeto = $("#file-es")[0].files[0]
+	var imagenObjetoButton = $("#file-es")[0].files[0]
+
 	// Obtenemos el nombre de la imagen
 	var nombreImagen = ''
-	var actualizar = false
+	let nombreImagenButton = ''	// Nombre de la imagen obtenida del boton de la interfaz
+	let nombreImagenActual = ''	// Nombre de la imagen actual del producto 
 
-	if( imagenObjeto!=null ) {
-		nombreImagen = imagenObjeto.name
-		actualizar = true
-	} else {
-		nombreImagen = $("#imagenProducto").attr("src")
-	}
-
-	console.log("nombre imagen: "+nombreImagen)
-
-	if(actualizar) {
+	// Se evalúa si se va o no a modificar imagen del producto
+	// Se realiza actualización de datos del producto y se actualiza también la imagen del producto
+	if( imagenObjetoButton != null ) 
+	{
+		// Obtenemos el nombre de la imagen cargada por el botón
+		nombreImagen = imagenObjetoButton.name  
+		// Obtenemos el nombre de la imagen actual del producto
+		nombreImagenActual = obtenerNombreImagen($("#imagenProducto").attr("src")) 
 
 		// Obtenemos la dirección o URL de la ubicación de la imagen subida en Firebase (storage)
 		storageRef.child('imagenes/' + nombreImagen).getDownloadURL().then(function(url) {	
-			
+			// 
+			// Paso 1: Se modifica el producto seleccionado
+			// 
 			refPapeleriaSucreBD.child(keyProductoModificar).update({
 				nombre: nombreP,
 				marca: marcaP,
@@ -69,25 +69,32 @@ function modificarProductoEnFirebase(event) {
 				imagen: url
 			});		
 			
+			// 
+			// Paso 2: Eliminar la imagen del producto del "storage" o almacenamiento de firestore
+			// 			
+			eliminarImagenProductoStorage(nombreImagenActual)
+
 		}).catch(function(error){		
 			alert('Error: No se logró obtener la ubicación de la imagen del producto')
 		});
 
-	}
-	else {
-			refPapeleriaSucreBD.child(keyProductoModificar).update({
-				nombre: nombreP,
-				marca: marcaP,
-				tipo: tipoP,
-				descripcion: descripcionP,
-				medidas: medidasP,
-				cantidad: cantidadP,
-				precio: precioP,
-				imagen: nombreImagen
-			});		
-			// alert("El producto fue modificado correctamente!")
-			alertify.alert("Papelería Sucre","El producto fue modificado correctamente!")
+	} 
+	else // Se realiza la actualización de datos pero no se actualiza imagen del producto
+	{
+		nombreImagen = $("#imagenProducto").attr("src")  // Obtenemos el nombre la imagen obtenido del "storage"		
 
+		refPapeleriaSucreBD.child(keyProductoModificar).update({
+			nombre: nombreP,
+			marca: marcaP,
+			tipo: tipoP,
+			descripcion: descripcionP,
+			medidas: medidasP,
+			cantidad: cantidadP,
+			precio: precioP,
+			imagen: nombreImagen
+		});		
+		// alert("El producto fue modificado correctamente!")
+		alertify.alert("Papelería Sucre","El producto fue modificado correctamente!")
 	}
 
 
@@ -99,6 +106,26 @@ function modificarProductoEnFirebase(event) {
 	// Después de realizar la modificación volver a la página de "consultar.html"
 	// window.location.replace("../consultar.html")
 
+}
+
+// Función para obtener el nombre de la imagen a borrar en Storage
+function obtenerNombreImagen(str) {
+	var nombre = str.split("?")[0]
+	nombre = nombre.split("%2F")[1]
+	return nombre
+}
+
+
+function eliminarImagenProductoStorage( imagen ) {
+
+		console.log("Nombre imagen a eliminar de storage: "+imagen)
+
+		// Obtenemos referencia a Storage de Firebase, donde se encuentre la imagen a borrar
+		refStorage = firebase.storage().ref().child('imagenes/' + imagen)
+
+		// Se elimina la imagen de Storage en Firebase
+		refStorage.delete().then( () => console.log("Producto eliminado de storage") )
+			.catch( (e) => console.log("No se pudo eliminar la imagen del storage") )
 }
 
 // ===========================================================================

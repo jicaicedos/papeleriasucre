@@ -19,6 +19,7 @@ function adicionarProducto() {
 	// Permisos en Storage
 	// Tener en cuenta que para la seguridad se deben autenticar ya sea por una cuenta de Google,  Facebook,  Twitter o similares
 	// request.auth!=null
+	// Para pruebas colocar en "true"   >>  allow read, write: if true  --> en vez de --> allow read, write: if request.auth!=null;
 	cargarImagen()
 }
 
@@ -52,9 +53,8 @@ function enviarDatosProductoAFirebase(event) {
 	const cantidadP 	= $("#cantidad-del-producto").val()
 	const precioP 		= $("#precio-del-producto").val()
 
-
 	// Obtenemos la dirección o URL de la ubicación de la imagen subida en Firebase (storage)
-	storageRef.child('imagenes/' + nombreImagen).getDownloadURL().then(function(url) {
+	storageRef.child('imagenes/' + nombreImagen).getDownloadURL().then( function (url) {
 
 		refPapeleriaSucreBD.push({
 			nombre: nombreP,
@@ -67,14 +67,14 @@ function enviarDatosProductoAFirebase(event) {
 			imagen: url,
 		});
 
-	}).catch(function(error){
-		alertify.error('Papelería Sucre','Error: No se logró obtener la ubicación de la imagen del producto')
-	});
+	}).catch( 
+		(error) => alert('Error: No se logró obtener la ubicación de la imagen del producto')
+	);
 
 	// Limpiamos los datos ingresados por el usuario en el formulario de "Adicionar producto"
 	formAdicionarProducto.reset()
 
-	alertify.alert('Papelería Sucre','Producto agregado exitosamente',function(){})
+	// alertify.alert('Papelería Sucre','Producto agregado exitosamente',function(){})
 	// alertify.error('Papelería Sucre','Error: No se logró obtener la ubicación de la imagen del producto')
 
 }

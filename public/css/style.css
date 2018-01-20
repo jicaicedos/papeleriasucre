@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?se5efm');
-  src:  url('fonts/icomoon.eot?se5efm#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?se5efm') format('truetype'),
-    url('fonts/icomoon.woff?se5efm') format('woff'),
-    url('fonts/icomoon.svg?se5efm#icomoon') format('svg');
+  font-family: 'papeleria_css';
+  src:  url('fonts/papeleria_css.eot?k497d9');
+  src:  url('fonts/papeleria_css.eot?k497d9#iefix') format('embedded-opentype'),
+    url('fonts/papeleria_css.ttf?k497d9') format('truetype'),
+    url('fonts/papeleria_css.woff?k497d9') format('woff'),
+    url('fonts/papeleria_css.svg?k497d9#papeleria_css') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
+  font-family: 'papeleria_css' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -34,44 +34,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-pencil:before {
-  content: "\e905";
-}
 .icon-pencil2:before {
   content: "\e906";
-}
-.icon-file-text:before {
-  content: "\e922";
-}
-.icon-profile:before {
-  content: "\e923";
-}
-.icon-file-text2:before {
-  content: "\e926";
-}
-.icon-stack:before {
-  content: "\e92e";
 }
 .icon-download:before {
   content: "\e960";
 }
-.icon-spinner11:before {
-  content: "\e984";
+.icon-search:before {
+  content: "\e986";
 }
 .icon-bin:before {
   content: "\e9ac";
-}
-.icon-bin2:before {
-  content: "\e9ad";
-}
-.icon-play2:before {
-  content: "\ea15";
-}
-.icon-play3:before {
-  content: "\ea1c";
-}
-.icon-terminal:before {
-  content: "\ea81";
 }
 .icon-file-pdf:before {
   content: "\eadf";

@@ -70,7 +70,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<h1 colspan="12">Modificar</h1>
+				<h1 colspan="8">Modificar</h1>
 			</div>
 		</div>
 		<div class="row" >
@@ -79,26 +79,43 @@
 				<form action="" id="form-modificar-producto">
 					<table class="table table-responsive">
 						<tr>
-							<td><label for="">Nombre</label><input type="text" id="nombreProducto" class="form-control"></td>	<td><label for="">Marca</label><input type="text" id="marcaProducto" class="form-control"></td>		<td><label for="">Tipo</label><input type="text" id="tipoProducto" class="form-control"></td>				
+							<td  colspan="4">
+								<label for="">Nombre</label>
+								<input type="text" id="nombreProducto" class="form-control">
+							</td>	
+						</tr>
+						<tr>						
+							<td colspan="2">
+								<label for="">Marca</label>
+								<input type="text" id="marcaProducto" class="form-control">
+							</td>		
+							<td colspan="2">
+								<label for="">Tipo</label>
+								<input type="text" id="tipoProducto" class="form-control">
+							</td>
 						</tr>
 						<tr>												
-							<td colspan="2"><label for="">Descripción</label><input type="text" id="descripcionProducto" class="form-control"></td>
-							<td><label for="">Medidas</label><input type="text" id="medidasProducto" class="form-control"></td>
+							<td colspan="4">
+								<label for="">Descripción</label>
+								<input type="text" id="descripcionProducto" class="form-control">
+							</td>
 						</tr>
-						<tr>
-							
-						</tr>										
-						<tr>
+						<tr>							
+							<td><label for="">Medidas</label><input type="text" id="medidasProducto" class="form-control"></td>
 							<td><label for="">Cantidad</label><input type="text" id="cantidadProducto" class="form-control"></td>
 							<td><label for="">Precio</label><input type="text" id="precioProducto" class="form-control"></td>
-							<td><label for=""><img id="imagenProducto" src="" alt="imagen_producto" width="150" height="auto"></label></td>
 						</tr>
 						<tr>
-							<td colspan="3">
+							<td>
+								<label for=""></label>
+								<img id="imagenProducto" src="" alt="imagen_producto" width="150" height="auto">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4">
 								<div class="form-group">
 									<label for="">Seleccione otra imagen si desea cambiar la actual</label>
-									<br>
-									<progress value="0" max="100" id="uploader" ></progress>
+									<!-- <progress value="0" max="100" id="uploader" ></progress> -->
 									<input id="file-es" name="imagenProducto" id="btnImagenProducto" value="upload" class="file-4" type="file" data-upload-url="#" />
 								</div>
 							</td>

@@ -4,12 +4,6 @@ var datos
 
 refPapeleriaSucreBD = firebase.database().ref().child("papeleriabd")
 
-// Creamos referencia al Storage del Proyecto Papeleria Sucre
-// refPapeleriaSucreStorage = firebase.storage().ref().child("papeleriasucre")
-// storageRef = firebase.storage().ref()
-
-
-
 refPapeleriaSucreBD.on("value", function(snap) {
 
 	datos = snap.val()
@@ -28,7 +22,7 @@ refPapeleriaSucreBD.on("value", function(snap) {
 									"<td>" + datos[key].cantidad + "</td>" +
 									"<td>" + datos[key].precio + "</td>" +
 									"<td class='ocultarColumna'><img src='" + datos[key].imagen + "' alt='' width='30' height='auto' /></td>" +
-									"<td> <button class='btnModificar icon-pencil btn-warning' keyProducto='" + key + "'></button></td>" +
+									"<td> <button class='btnModificar icon-pencil2 btn-warning' keyProducto='" + key + "'></button></td>" +
 									"<td> <button class='btnEliminar icon-bin btn-danger' keyProducto='" + key + "'></button></td>" +
 								"</tr>"
 	}
@@ -61,15 +55,40 @@ refPapeleriaSucreBD.on("value", function(snap) {
 
 function eliminarProducto() {
 	
+	
 	var keyProducto = this.getAttribute("keyProducto")
 
-	// var confirmar = confirm("¿Está seguro(a) de eliminar el producto? " + datos[keyProducto].nombre)
 	alertify.confirm("Papelería Sucre", "¿Está seguro(a) de eliminar el producto? " + datos[keyProducto].nombre, function() {
+
+
+		// 
+		// Paso 1: Eliminar la imagen del producto del "storage" o almacenamiento de firestore
+		// 
+		// Obtenemos el nombre de la imagen a borrar de Storage
+		let nombreImagen = obtenerNombreImagen(datos[keyProducto].imagen)	
+
+		// Obtenemos referencia a Storage de Firebase, donde se encuentre la imagen a borrar
+		refStorage = firebase.storage().ref().child('imagenes/' + nombreImagen)
+
+		// Se elimina la imagen de Storage en Firebase
+		refStorage.delete().then( () => console.log("Producto eliminado de storage") )
+			.catch( (e) => console.log("No se pudo eliminar la imagen del storage") )
+
+
+		// 
+		// Paso 2: Eliminar el producto de la base de datos
+		// 
 		refProducto = refPapeleriaSucreBD.child(keyProducto)
 		refProducto.remove()
-		alertify.success("Producto eliminado")
-	}, function() {
-		alertify.error("No se elimina el producto")
-	});
+
+	}, () => alertify.error("No se elimina el producto") 
+	);
+
 }
 
+// Función para obtener el nombre de la imagen a borrar en Storage
+function obtenerNombreImagen(str) {
+	var nombre = str.split("?")[0]
+	nombre = nombre.split("%2F")[1]
+	return nombre
+}
