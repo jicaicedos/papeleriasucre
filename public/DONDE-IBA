@@ -1,4 +1,15 @@
+- cuando se cargue debe crear un archivo o variable JSON
+	Para realizar búsquedas
+
+- Cargar los archivos una vez al iniciar 
+	- Actualizar el cargue cuando se adicione nuevo producto o cuando se modifique el producto
+
 - Página de inicio con carrusel de productos... algo impactante ojalá!!!
 	https://getbootstrap.com/docs/4.0/components/carousel/
+
+- Agregar paginación a los resultados
+
+
+- Terminar el iniciar y cerrar sesión
 
 

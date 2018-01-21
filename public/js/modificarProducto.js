@@ -74,6 +74,11 @@ function modificarProductoEnFirebase(event) {
 			// 			
 			eliminarImagenProductoStorage(nombreImagenActual)
 
+			alertify.alert("Papelería Sucre","El producto fue modificado correctamente!")
+
+			// Colocamos no cargados, para volver a cargar desde la base de datos
+			localStorage.setItem("cargados", "no")			
+
 		}).catch(function(error){		
 			alert('Error: No se logró obtener la ubicación de la imagen del producto')
 		});
@@ -93,10 +98,12 @@ function modificarProductoEnFirebase(event) {
 			precio: precioP,
 			imagen: nombreImagen
 		});		
-		// alert("El producto fue modificado correctamente!")
+	
 		alertify.alert("Papelería Sucre","El producto fue modificado correctamente!")
-	}
 
+		// Colocamos no cargados, para volver a cargar desde la base de datos
+		localStorage.setItem("cargados", "no")				
+	}
 
 	// Limpiamos los datos ingresados por el usuario en el formulario de "Adicionar producto"
 	formAdicionarProducto.reset()
@@ -126,6 +133,9 @@ function eliminarImagenProductoStorage( imagen ) {
 		// Se elimina la imagen de Storage en Firebase
 		refStorage.delete().then( () => console.log("Producto eliminado de storage") )
 			.catch( (e) => console.log("No se pudo eliminar la imagen del storage") )
+
+	// Colocamos no cargados, para volver a cargar desde la base de datos
+	localStorage.setItem("cargados", "no")			
 }
 
 // ===========================================================================

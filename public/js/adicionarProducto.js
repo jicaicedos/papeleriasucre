@@ -67,15 +67,13 @@ function enviarDatosProductoAFirebase(event) {
 			imagen: url,
 		});
 
+		alertify.alert('Papelería Sucre', 'Producto adicionado exitosamente!');
+
 	}).catch( 
-		(error) => alert('Error: No se logró obtener la ubicación de la imagen del producto')
+		(error) => alertify.alert('Papelería Sucre', 'Error: No se logró obtener la ubicación de la imagen del producto')
 	);
 
 	// Limpiamos los datos ingresados por el usuario en el formulario de "Adicionar producto"
 	formAdicionarProducto.reset()
-
-	// alertify.alert('Papelería Sucre','Producto agregado exitosamente',function(){})
-	// alertify.error('Papelería Sucre','Error: No se logró obtener la ubicación de la imagen del producto')
-
 }
 
