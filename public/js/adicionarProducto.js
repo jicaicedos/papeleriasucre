@@ -45,10 +45,10 @@ function enviarDatosProductoAFirebase(event) {
 	var storageRef = firebase.storage().ref()
 
 	// Obtenemos los datos ingresados por el usuario en la interfaz
-	const nombreP 		= $("#nombre-del-producto").val()
-	const marcaP 		= $("#marca-del-producto").val()
-	const tipoP 		= $("#tipo-del-producto").val()
-	const descripcionP 	= $("#descripcion-del-producto").val()
+	const nombreP 		= $("#nombre-del-producto").val().toLowerCase()
+	const marcaP 		= $("#marca-del-producto").val().toLowerCase()
+	const tipoP 		= $("#tipo-del-producto").val().toLowerCase()
+	const descripcionP 	= $("#descripcion-del-producto").val().toLowerCase()
 	const medidasP 		= $("#medidas-del-producto").val()
 	const cantidadP 	= $("#cantidad-del-producto").val()
 	const precioP 		= $("#precio-del-producto").val()
@@ -67,11 +67,13 @@ function enviarDatosProductoAFirebase(event) {
 			imagen: url,
 		});
 
-		alertify.alert('Papelería Sucre', 'Producto adicionado exitosamente!');
+		alertify.alert('Papelería Sucre', 'Producto adicionado exitosamente!');		
 
 	}).catch( 
 		(error) => alertify.alert('Papelería Sucre', 'Error: No se logró obtener la ubicación de la imagen del producto')
 	);
+	// Fijamos "cargados" en "no" para que la aplicación vuelva a cargar los datos desde la base de datos
+	localStorage.setItem("cargados", "no")	
 
 	// Limpiamos los datos ingresados por el usuario en el formulario de "Adicionar producto"
 	formAdicionarProducto.reset()

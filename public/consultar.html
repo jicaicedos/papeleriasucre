@@ -67,7 +67,7 @@
 	<!-- Estructura de la página -->
 	<div class="container">
 		<div class="row input-group"><span class="input-group-addon">Buscar</span>
-			<input id="filtrar" type="text" class="form-control" placeholder="Ejemplo: cuaderno">
+			<input id="filtrar" type="text" class="form-control" placeholder="Ejemplo: cuaderno" autofocus>
 		</div>
 		<hr>
 		<div class="row">
@@ -76,7 +76,7 @@
 					<thead class="thead-light">
 						<tr>
 							<th>Nombre</th>
-							<th>Marca</th>
+							<th class="split-busqueda">Marca</th>
 							<th class="ocultarColumna">Tipo</th>
 							<th class="ocultarColumna">Descripción</th>
 							<th class="ocultarColumna">Medidas</th>
@@ -100,6 +100,7 @@
  	<script>cargarFooter()</script>
  	<script>cargarNav()</script>
  	<script>filtrar()</script>
+ 	<!-- <script>resaltarTexto()</script> -->
 
 </body>
 </html>

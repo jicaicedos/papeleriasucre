@@ -38,6 +38,13 @@ body {
 	display: grid;
 }
 
+/* 
+	Estilos para resaltar texto en búsquedas dentro de páginas Web
+*/
+.highlight {
+	background-color: #F9C957;
+}
+
 /*
 	Ocultamos por ahora la barra de progreso de carga de la imagen
 */

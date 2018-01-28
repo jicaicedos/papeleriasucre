@@ -3,23 +3,27 @@ var refPapeleriaSucreStorage
 var datos
 var productos
 
+// Productos cargados de la base de datos
+var registrosProductos
+
+var fila
+var complemento
+
 refPapeleriaSucreBD = firebase.database().ref().child("papeleriabd")
 
 refPapeleriaSucreBD.on("value", function(snap) {
 
 	datos = snap.val()
-	// Productos cargados de la base de datos
-	var registrosProductos
+	registrosProductos = ""
 
 	// Se evalua si existen datos para cargar
 	if ( snap != null && localStorage.getItem("cargados") == "no" ) {
 		localStorage.setItem("existenDatos", "si")
 
 		for(var key in datos) {
-
 			registrosProductos += 	"<tr>" +
 										"<td>" + datos[key].nombre + "</td>" +
-										"<td>" + datos[key].marca + "</td>" +
+										"<td class='split-busqueda'>" + datos[key].marca + "</td>" +
 										"<td class='ocultarColumna'>" + datos[key].tipo + "</td>" +
 										"<td class='ocultarColumna'>" + datos[key].descripcion + "</td>" +
 										"<td class='ocultarColumna'>" + datos[key].medidas + "</td>" +
@@ -66,7 +70,7 @@ refPapeleriaSucreBD.on("value", function(snap) {
 
 
 		for(var i=0; i < productos.length; i++ ) {
- 			console.log("evento eliminar: " + productos[i])
+ 			
 			productos[i].addEventListener("click", eliminarProducto, false)			
 		}
 
@@ -82,8 +86,9 @@ refPapeleriaSucreBD.on("value", function(snap) {
 });
 
 // ===========================================================================
+// 
 // Eliminar producto de la papelería
-
+// 
 function eliminarProducto() {
 	
 	
@@ -125,11 +130,15 @@ function obtenerNombreImagen(str) {
 }
 
 // =======================================================================================
+// 
 //  Función para filtrar resultados
+// 
 function filtrar() {
+	
     $(document).ready(function () {
         (function ($) {
             $('#filtrar').keyup(function () {
+            	resaltarTexto()
                 var rex = new RegExp($(this).val(), 'i');
                 $('.buscar tr').hide();
                 $('.buscar tr').filter(function () {
@@ -137,5 +146,56 @@ function filtrar() {
                 }).show();
             })
         }(jQuery));
-    });
+        
+    });      
+}
+
+
+// ==========================================================================================
+// 
+// Función para resaltar texto del criterio de la búsqueda
+// 
+function resaltarTexto() {
+
+	if( $("#filtrar").val()=="" ) {
+		textoBuscado = document.getElementById("table-productos")
+		textoBuscado.innerHTML = localStorage.getItem("registros")
+	}
+	else {
+
+		var texto = $("#filtrar").val()
+		// console.log(texto)
+
+		textoBuscado = document.getElementById("table-productos")
+		textoBuscado.innerHTML = ""
+		// var innerHTML = textoBuscado.innerHTML
+
+		var innerHTML = localStorage.getItem("registros")
+
+		var filas = innerHTML.split("<tr><td>")
+		var resultado
+
+		
+		for(var i=1; i < filas.length; i++ ) {
+			// console.log("Numero filas: " + filas.length)
+
+			fila = filas[i].split(`</td><td class="split-busqueda">`)[0]
+			// console.log("fila: " + fila)	
+
+			complemento = filas[i].split(`</td><td class="split-busqueda">`)[1]
+			// console.log("complemento: " + complemento)	
+
+			var index = fila.indexOf(texto)
+			if ( index >= 0 ) {
+				fila = "<tr><td>" + fila.substring(0,index) + 
+							"<span class='highlight'>" + 
+								fila.substring(index,index+texto.length) + 
+							"</span>" + 
+							fila.substring(index + texto.length) +
+							"</td>"
+				textoBuscado.innerHTML += fila + `</td><td class="split-busqueda">` + complemento	
+			}
+		}	
+	}
+
 }
