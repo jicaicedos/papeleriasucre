@@ -22,8 +22,8 @@ refPapeleriaSucreBD.on("value", function(snap) {
 
 		for(var key in datos) {
 			registrosProductos += 	"<tr>" +
-										"<td>" + datos[key].nombre + "</td>" +
-										"<td class='split-busqueda'>" + datos[key].marca + "</td>" +
+										"<td class='inicio'>" + datos[key].nombre + "</td>" +
+										"<td class='final'>" + datos[key].marca + "</td>" +
 										"<td class='ocultarColumna'>" + datos[key].tipo + "</td>" +
 										"<td class='ocultarColumna'>" + datos[key].descripcion + "</td>" +
 										"<td class='ocultarColumna'>" + datos[key].medidas + "</td>" +
@@ -37,8 +37,6 @@ refPapeleriaSucreBD.on("value", function(snap) {
 
 		localStorage.setItem("registros", registrosProductos)
 		localStorage.setItem("cargados", "si")
-
-
 
 		$("#table-productos").html(registrosProductos)
 
@@ -157,6 +155,8 @@ function filtrar() {
 // 
 function resaltarTexto() {
 
+	var nombresProductos = []
+
 	if( $("#filtrar").val()=="" ) {
 		textoBuscado = document.getElementById("table-productos")
 		textoBuscado.innerHTML = localStorage.getItem("registros")
@@ -164,7 +164,6 @@ function resaltarTexto() {
 	else {
 
 		var texto = $("#filtrar").val()
-		// console.log(texto)
 
 		textoBuscado = document.getElementById("table-productos")
 		textoBuscado.innerHTML = ""
@@ -172,30 +171,42 @@ function resaltarTexto() {
 
 		var innerHTML = localStorage.getItem("registros")
 
-		var filas = innerHTML.split("<tr><td>")
+		var filas = innerHTML.split("<tr><td class='inicio'>")
+		
 		var resultado
 
+
+		// Obtenemos los nombre de los productos
+		nombresProductos = obtenerNombresProductos(filas)
 		
-		for(var i=1; i < filas.length; i++ ) {
-			// console.log("Numero filas: " + filas.length)
+		for(var i=1; i < filas.length; i++ ) { // se inicia desde 1 puesto que al leer de firebase nos añade un registro vacio "undefined"
 
-			fila = filas[i].split(`</td><td class="split-busqueda">`)[0]
-			// console.log("fila: " + fila)	
+			// fila = filas[i].split(`<tr><td class='inicio'>`)[0]
 
-			complemento = filas[i].split(`</td><td class="split-busqueda">`)[1]
-			// console.log("complemento: " + complemento)	
+			complemento = filas[i].split(`</td><td class='final'>`)[1]
+			var index = nombresProductos[i].indexOf(texto)
 
-			var index = fila.indexOf(texto)
 			if ( index >= 0 ) {
-				fila = "<tr><td>" + fila.substring(0,index) + 
-							"<span class='highlight'>" + 
-								fila.substring(index,index+texto.length) + 
-							"</span>" + 
-							fila.substring(index + texto.length) +
-							"</td>"
-				textoBuscado.innerHTML += fila + `</td><td class="split-busqueda">` + complemento	
+				fila = "<tr><td class='inicio'>" + 
+						nombresProductos[i].substring(0,index) + 
+						colocarEstiloResaltadoCSS( nombresProductos[i].substring(index,index+texto.length) ) +
+						nombresProductos[i].substring(index + texto.length) +
+						"</td>"
+				textoBuscado.innerHTML += fila + `</td><td class='final'>` + complemento	
 			}
 		}	
 	}
 
+}
+
+function obtenerNombresProductos(filas) {
+	var nombres = []
+	for(var i=1; i < filas.length; i++ ) {
+		nombres[i] = filas[i].split(`</td><td class='final'>`)[0]
+	}
+	return nombres
+}
+
+function colocarEstiloResaltadoCSS(texto) {
+	return "<span class='highlight'>" + texto + "</span>"
 }
